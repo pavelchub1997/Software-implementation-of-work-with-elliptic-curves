@@ -5,7 +5,8 @@ def count(top, lower, field):
     top %= field
     lower %= field
 
-    while top % lower != 0: top += field
+    while top % lower != 0: 
+        top += field
     return top//lower
 
 def sum_point_P(elem_x_1, elem_x_2, elem_y_1, elem_y_2, field):
@@ -32,7 +33,8 @@ def sum_point_2P(elem_x_1, elem_y_1, a, field):
 def calc_sum(buff_list, field):
 
     x_3, y_3 = buff_list[0][0], buff_list[0][1]
-    for i in range(1, len(buff_list)): x_3, y_3 = sum_point_P(x_3, buff_list[i][0], y_3, buff_list[i][1], field)
+    for i in range(1, len(buff_list)): 
+        x_3, y_3 = sum_point_P(x_3, buff_list[i][0], y_3, buff_list[i][1], field)
     return x_3, y_3
 
 def coeff_split(x, y, a, coeff, field):

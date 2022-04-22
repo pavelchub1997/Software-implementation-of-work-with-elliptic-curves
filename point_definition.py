@@ -1,14 +1,19 @@
-def symbol_Legandra(value, field):
-
-    result = pow(value, int((field-1)/2), field)
-    if result == 1: return 1
-    elif result == field-1: return -1
-    elif result == 0: return 0
-
-def find_nonchedule(buff_list, field):
-
-    for i in buff_list:
-        if symbol_Legandra(i, field) == -1: return i
+def forming_list(buff_list, a, b, field):
+    list_y_1, list_x, count = [], [], 0
+    s, Q = droblenie_field(field)
+    val_nevychet = find_nonchedule(buff_list, field)
+    for elem in buff_list:
+        val = int(elem**3 + elem*a + b)
+        if symbol_Legandra(val, field) == -1: 
+            continue
+        else:
+            if symbol_Legandra(val, field) == 1: 
+                count += 2
+            elif symbol_Legandra(val, field) == 0: 
+                count += 1
+            list_y_1.append(value_calc(val, val_nevychet, s, Q, field))
+            list_x.append(elem)
+    return list_x, list_y_1, count
 
 def droblenie_field(field):
     k, s = field - 1, 0
@@ -18,27 +23,21 @@ def droblenie_field(field):
             Q = int((field - 1) / int(pow(2, s)))
             k = k / 2
             continue
-        else: break
+        else: 
+            break
     return s, Q
 
-def forming_list(buff_list, a, b, field):
-    list_y_1, list_x, count = [], [], 0
-    s, Q = droblenie_field(field)
-    val_nevychet = find_nonchedule(buff_list, field)
-    for elem in buff_list:
-        val = int(elem**3 + elem*a + b)
-        if symbol_Legandra(val, field) == -1: continue
-        else:
-            if symbol_Legandra(val, field) == 1: count += 2
-            elif symbol_Legandra(val, field) == 0: count += 1
-            list_y_1.append(value_calc(val, val_nevychet, s, Q, field))
-            list_x.append(elem)
-    return list_x, list_y_1, count
+def find_nonchedule(buff_list, field):
 
-def find_value_i(M, t, field):
+    for i in buff_list:
+        if symbol_Legandra(i, field) == -1: return i
 
-    for i in range(1, M):
-        if (t**(2**i)) % field == 1: return i
+def symbol_Legandra(value, field):
+
+    result = pow(value, int((field-1)/2), field)
+    if result == 1: return 1
+    elif result == field-1: return -1
+    elif result == 0: return 0
 
 def value_calc(y_2, val_nevychet, s, Q, field):
 
@@ -62,3 +61,9 @@ def value_calc(y_2, val_nevychet, s, Q, field):
                     t = (t*(b**2)) % field
                     c = (b**2) % field
                     M = i
+
+def find_value_i(M, t, field):
+
+    for i in range(1, M):
+        if (t**(2**i)) % field == 1: 
+            return i

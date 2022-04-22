@@ -1,10 +1,10 @@
 import time, point_definition, result_func
 
 def menu(a, b, field):
-    t1 = time.clock()
+    t1 = time.time()
     buff_list = [i for i in range(field)]
     list_x, list_y, count = point_definition.forming_list(buff_list, a, b, field)
-    t2 = time.clock()
+    t2 = time.time()
     print('Порядок кривой равен: ', count+1)
     print('Время формирования точек равно: ', t2-t1)
     while True:
